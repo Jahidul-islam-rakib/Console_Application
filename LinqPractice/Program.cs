@@ -99,6 +99,7 @@ namespace LibrarayManagement
 
 			foreach (Student student in EvenId)
 			{
+
 				Console.WriteLine($"name = {student.Name}, id = {student.Id}");
 			}
 
