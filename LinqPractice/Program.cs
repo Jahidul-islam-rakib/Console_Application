@@ -4,6 +4,7 @@ using LinqPractice.OOPUse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Reflection.Metadata.BlobBuilder;
@@ -20,12 +21,25 @@ namespace LibrarayManagement
 			{
 				new Student(2, "hanjal", 44),
 				new Student(1, "Habib", 20),
-				new Student(12, "hanjal", 33),
+				new Student(12, "hanjal", 44),
 				new Student(3, "rashed", 22),
 				new Student(13, "hanjal", 12),
-				new Student(5, "rajjib", 22),
-				new Student(33, "hanjal", 20),
-				new Student(14, "ujan", 2)
+				new Student(5, "rajib", 22),
+				new Student(33, "anoar", 20),
+				new Student(14, "rajib", 2)
+
+			};
+
+			List<Student> students2 = new List<Student>
+			{
+				new Student(2, "kabil", 2),
+				new Student(11, "kajim", 43),
+				new Student(12, "kased", 12),
+				new Student(52, "rashed", 4),
+				new Student(13, "yamin", 2),
+				new Student(52, "rajib", 43),
+				new Student(33, "hanjal", 15),
+				new Student(14, "kased", 2)
 
 			};
 
@@ -94,13 +108,55 @@ namespace LibrarayManagement
 
 
 			//-------------------- name diye check ----------------------
-			var EvenId = students.Where(stud => stud.Name =="hanjal" );
+			//var EvenId = students.Where(stud => stud.Name == "hanjal");
 
 
-			foreach (Student student in EvenId)
+			//foreach (Student student in EvenId)
+			//{
+
+			//	Console.WriteLine($"name = {student.Name}, id = {student.Id}");
+			//}
+
+
+			// ==================== > select operator
+			//var SelectedProperty = students.Select(s => s.Name).ToList();
+			//var SelectMultipleProperty = students.Select(s => new { s.Name, s.Age }).ToList();
+
+			//foreach (var obj in SelectedProperty)
+			//{
+			//	Console.WriteLine($"name = {obj}"); // single property
+			//}
+			//foreach (var obj in SelectMultipleProperty)
+			//{
+			//	Console.WriteLine($"name = {obj.Name }, age= {obj.Age}"); // multiple property
+			//}
+
+			//=======================OfType operator 
+
+			//var stringtype = students.select(s => s.name).oftype<string>().tolist();
+
+			//foreach(var st in stringtype)
+			//{
+			//             console.writeline(st); // see all string variable in name property of students
+			//         }
+
+			// ======================== distinct() method
+			//var Individualobj = students.Select(s => s.Name).Distinct().ToList();
+			//foreach (var singleobj in Individualobj)
+			//{
+			//	Console.WriteLine($"name = {singleobj}"); // if any double named value in name column , it will be singled that means remove that item.
+			//}
+
+
+
+
+
+
+			//======================== Except() method
+			var nonCommon = students.Select(x => x.Name).Except(students2.Select(sName => sName.Name)).ToList() ;
+			foreach (var st in nonCommon)
 			{
-
-				Console.WriteLine($"name = {student.Name}, id = {student.Id}");
+				Console.WriteLine($"name = {st}"); //Returns the difference between two collections.
 			}
 
 
@@ -111,7 +167,11 @@ namespace LibrarayManagement
 
 
 
+
+
 			Console.WriteLine("hi there");
+			Console.ReadLine(); // KEEPS THE CONSOLE OPEN UNTIL YOU PRESS ANY KEY
+			//Console.ReadLine(); // Keeps the console open until you press Enter
 		}
 	}
 }
